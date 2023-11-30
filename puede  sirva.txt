@@ -1,0 +1,51 @@
+case class InfoEmpleado(direccion: String, email: String, telefono: String)
+case class Posicion(titulo:String, departamento: String, salario: Double)
+case class Empresa (nombre:String, ubicacion: String, infoEmpleado: InfoEmpleado)
+case class Empleado(id:String, apellido:String, nombre:String, posicion: Posicion, empresa: Empresa)
+
+Código 
+//objetos de tipo InfoEmpleado
+val infoEmpleado1: InfoEmpleado = InfoEmpleado("Loja", "usuario@gmail.com", "0987256341")
+val infoEmpleado2: InfoEmpleado = InfoEmpleado("Quito", "usuario1@gmail.com", "0987256333")
+val infoEmpleado3: InfoEmpleado = InfoEmpleado("Zamora", "usuario2@gmail.com", "0982256341")
+
+//objetos de tipo Posicion
+val posicion1:Posicion = Posicion("Gerente", "MA", 2000.00)
+val posicion2:Posicion = Posicion("Recursos humanos", "RH", 1000.00)
+val posicion3:Posicion = Posicion("Empleado", "E", 500.00)
+
+//objetos de tipo Empresa
+val empresa1: Empresa = Empresa("empresa1", "Loja", infoEmpleado1)
+val empresa2: Empresa = Empresa("empresa2", "Quito", infoEmpleado2)
+val empresa3: Empresa = Empresa("empresa3", "Zamora", infoEmpleado3)
+
+//Creamos la lista y dento creamos objetos de tipo Empleado
+val listaEmpleados: List[Empleado] = List(
+  Empleado("111", "Jaramillo", "Juan", posicion1, empresa1),
+  Empleado("222", "Seminario", "Pedro", posicion2, empresa2),
+  Empleado("333", "Vaca", "Pepe", posicion3, empresa3)
+)
+
+
+// devuelve el salario
+def func1(empleados:List[Empleado]):List[Double] = {
+  empleados.map(_.posicion.salario)
+}
+func1(listaEmpleados)
+// Salida: List(2000.0, 1000.0, 500.0)
+
+
+// devuelve el nombre de las empresas
+def func2(empleados: List[Empleado]): List[String] = {
+  empleados.map(_.empresa.nombre)
+}
+func2(listaEmpleados)
+// Salida: List(empresa1, empresa2, empresa3)
+
+
+val resultado1: List[String] = listaEmpleados.map(_.posicion.titulo)
+// Salida: List(Gerente, Recursos humanos, Empleado)
+
+
+val resultado2: List[String] = listaEmpleados.map(_.empresa.infoEmpleado.email)
+// Salida: List(usuario@gmail.com, usuario1@gmail.com, usuario2@gmail.com)y
